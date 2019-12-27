@@ -1,5 +1,8 @@
 # YouTrack for Go
 
+[![GoDoc](https://godoc.org/github.com/drichardson/youtrack?status.svg)](https://godoc.org/github.com/drichardson/youtrack)
+[![Build Status](https://travis-ci.org/drichardson/youtrack.svg?branch=master)](https://travis-ci.org/drichardson/youtrack)
+
 Bare bones YouTrack REST API client library for Go that provides authentication
 using [Permanent Token Authorization](https://www.jetbrains.com/help/youtrack/incloud/authentication-with-permanent-token.html).
 
