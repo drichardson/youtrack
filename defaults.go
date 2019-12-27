@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/url"
 	"os"
+	"strings"
 )
 
 var NotFoundError = errors.New("Not Found")
@@ -21,6 +22,10 @@ func NewDefaultApi() (*Api, error) {
 	if err != nil {
 		log.Print("Could not determine default YouTrack URL.")
 		return nil, err
+	}
+	// For url.ResolveReferences to work later, baseURLString needs to end in a /.
+	if !strings.HasSuffix(baseURLString, "/") {
+		baseURLString += "/"
 	}
 	baseURL, err := url.Parse(baseURLString)
 	if err != nil {
