@@ -2,6 +2,7 @@ package youtrack
 
 import (
 	"context"
+	"net/url"
 )
 
 type Issue struct {
@@ -15,7 +16,7 @@ type createIssueResponse struct {
 	dollarType string `json:"$type"`
 }
 
-func (api *Api) CreateIssueRequest(ctx context.Context, project, summary, description string) error {
+func (api *Api) CreateIssue(ctx context.Context, project, summary, description string) error {
 	issue := &Issue{
 		Summary:     summary,
 		Description: description,
@@ -26,7 +27,7 @@ func (api *Api) CreateIssueRequest(ctx context.Context, project, summary, descri
 
 	var resp createIssueResponse
 
-	err := api.Post(ctx, "issues", issue, &resp)
+	err := api.Post(ctx, &url.URL{Path: "issues"}, issue, &resp)
 	if err != nil {
 		return err
 	}

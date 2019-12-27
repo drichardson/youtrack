@@ -13,3 +13,15 @@ There are also some convenience functions for creating issues.
 
 Contributions welcome.
 
+## Testing
+The tests communicate with an actual YouTrack endpoint and therefore need credentials to run. You
+can set these with the `YOUTRACK_URL` and `YOUTRACK_TOKEN` environment variables. The YouTrack
+project must have at least one project with the ID (aka issue prefix or shortName) of *TP*.
+
+To debug HTTP requests, run:
+
+    go test -v -yt-trace
+
+WARNING: `-yt-trace` logs the entire HTTP request, including *Authorization* token, so take care
+when using it or sharing any logs generated from it.
+

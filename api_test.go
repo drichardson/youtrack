@@ -1,22 +1,16 @@
 package youtrack
 
 import (
-	"context"
 	"testing"
-	"time"
 )
 
-func TestAPISystem(t *testing.T) {
-
+// The YOUTRACK_URL and YOUTRACK_TOKEN environment variables need to be setup for this to work.
+func TestDefaultApi(t *testing.T) {
 	api, err := NewDefaultApi()
 	if err != nil {
-		t.Error("Failed to create api.", err)
+		t.Fatal("Failed to create api.", err)
 	}
-
-	ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
-	defer cancel()
-	err = api.CreateIssueRequest(ctx, "Test Project", "Test Issue", "Test Issue Body")
-	if err != nil {
-		t.Error("Failed to create test issue.", err)
+	if api == nil {
+		t.Fatal("API is nil")
 	}
 }
