@@ -3,6 +3,7 @@ package youtrack
 import (
 	"bytes"
 	"context"
+	"net/url"
 	"testing"
 	"time"
 )
@@ -22,20 +23,35 @@ func TestIssuesSystem(t *testing.T) {
 		t.Fatal("Failed to lookup project ID for TP", err)
 	}
 
-	issueID, err := api.CreateIssue(ctx, projectID, "Test Issue", "Test Issue Body")
+	issue, err := api.CreateIssue(ctx, projectID, "Test Issue", "Test Issue Body")
 	if err != nil {
 		t.Fatal("Failed to create test issue.", err)
 	}
-	if issueID == "" {
+	if issue.ID == "" {
 		t.Fatal("Empty Issue ID.")
+	}
+	if issue.NumberInProject == 0 {
+		t.Fatal("NumberInProject is 0")
 	}
 
 	attachmentData := bytes.NewReader([]byte(`Test Attachment Data`))
-	attachmentID, err := api.CreateIssueAttachment(ctx, issueID, attachmentData, "myAttachment.txt", "text/plain")
+	attachmentID, err := api.CreateIssueAttachment(ctx, issue.ID, attachmentData, "myAttachment.txt", "text/plain")
 	if err != nil {
 		t.Fatal("Failed to create issue attachment.", err)
 	}
 	if attachmentID == "" {
 		t.Fatal("Empty attachment ID")
+	}
+}
+
+func TestIssuesURL(t *testing.T) {
+	base, err := url.Parse("https://example.com/youtrack/api/")
+	if err != nil {
+		t.Fatal("Failed to parse example base URL.", err)
+	}
+	u := IssueURL(base, "TP", 123)
+	expected := "https://example.com/youtrack/issue/TP-123"
+	if u.String() != expected {
+		t.Fatal(u.String(), "is not expected value", expected)
 	}
 }

@@ -15,11 +15,11 @@ type Project struct {
 // https://www.jetbrains.com/help/youtrack/incloud/2019.3/resource-api-admin-projects.html
 func (api *Api) ListProjects(ctx context.Context) ([]Project, error) {
 	var Projects []Project
-	u, err := url.Parse("admin/projects?fields=id,shortName")
-	if err != nil {
-		panic(err)
+	u := &url.URL{
+		Path:     "admin/projects",
+		RawQuery: "fields=id,shortName",
 	}
-	err = api.Get(ctx, u, &Projects)
+	err := api.Get(ctx, u, &Projects)
 	if err != nil {
 		return nil, err
 	}
