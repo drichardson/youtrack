@@ -23,7 +23,20 @@ func TestIssuesSystem(t *testing.T) {
 		t.Fatal("Failed to lookup project ID for TP", err)
 	}
 
-	issue, err := api.CreateIssue(ctx, projectID, "Test Issue", "Test Issue Body")
+	issueBody := `
+This is a test issue that uses *some* markdown.
+
+### This is a Heading 3
+This is a [link](https://example.com).
+
+Here is a code snippet:
+` + "```" + `
+class Test {
+
+};
+` + "```"
+
+	issue, err := api.CreateIssue(ctx, projectID, "Test Issue", issueBody)
 	if err != nil {
 		t.Fatal("Failed to create test issue.", err)
 	}
