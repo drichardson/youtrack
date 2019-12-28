@@ -37,6 +37,10 @@ func IssueURL(baseURL *url.URL, shortProjectName string, issueNumberInProject in
 	return baseURL.ResolveReference(&url.URL{Path: path})
 }
 
+func (api *Api) IssueURL(shortProjectName string, issueNumberInProject int) *url.URL {
+	return IssueURL(api.BaseURL, shortProjectName, issueNumberInProject)
+}
+
 // CreateIssue returns the issue ID on success.
 func (api *Api) CreateIssue(ctx context.Context, project, summary, description string) (*IssueResult, error) {
 	issue := &Issue{

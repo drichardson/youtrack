@@ -55,6 +55,11 @@ class Test {
 	if attachmentID == "" {
 		t.Fatal("Empty attachment ID")
 	}
+
+	u := api.IssueURL("TP", issue.NumberInProject)
+	if u.String() == "" {
+		t.Error("Expected u.String() to not be empty.")
+	}
 }
 
 func TestIssuesURL(t *testing.T) {
