@@ -1,4 +1,4 @@
-// The youtrack package is a REST API client that can be used with YouTrack as
+// Package youtrack implements REST API client that can be used with YouTrack as
 // described in
 // https://www.jetbrains.com/help/youtrack/incloud/Resources-for-Developers.html
 package youtrack

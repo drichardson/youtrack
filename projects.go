@@ -5,10 +5,6 @@ import (
 	"net/url"
 )
 
-type ProjectID struct {
-	ID string `json:"id"`
-}
-
 type Project struct {
 	ID        string `json:"id"`
 	ShortName string `json:"shortName"`
