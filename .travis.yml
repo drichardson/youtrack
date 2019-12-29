@@ -2,6 +2,7 @@ language: go
 
 go:
     - "1.13.1"
+    - "1.11"
     - "master"
 
 script: go test -v ./...
