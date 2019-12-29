@@ -58,9 +58,11 @@ func (api *Api) DoRequest(ctx context.Context, resource *url.URL, method string,
 		}
 	}
 
-	req, err := http.NewRequestWithContext(ctx, method, resourceURL.String(), reqBody)
+	// TODO: Move to NewRequestWithContext when 1.11 support no longer required.
+	// req, err := http.NewRequestWithContext(ctx, method, resourceURL.String(), reqBody)
+	req, err := http.NewRequest(method, resourceURL.String(), reqBody)
 	if err != nil {
-		log.Printf("NewRequestWithContext failed. %s", err)
+		log.Printf("NewRequest failed. %s", err)
 		return err
 	}
 
